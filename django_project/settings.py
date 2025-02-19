@@ -37,6 +37,9 @@ ALLOWED_HOSTS = ["blogapi-0kll.onrender.com", "localhost", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    # Local
+    "accounts.apps.AccountsConfig",
+    "posts.apps.PostsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,9 +58,6 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration", 
     "drf_spectacular",
-    # Local
-    "accounts.apps.AccountsConfig",
-    "posts.apps.PostsConfig",
 ]
 
 MIDDLEWARE = [
