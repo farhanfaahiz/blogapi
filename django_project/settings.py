@@ -163,7 +163,12 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:8000",
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",   # React frontend
+    "http://localhost:8000",   # Swagger and DRF API
+    "http://127.0.0.1:8000",   # Swagger sometimes runs on 127.0.0.1 too
+]
+
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
@@ -171,8 +176,45 @@ SITE_ID = 1
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Blog API Project",
-    "DESCRIPTION": "A sample blog to learn about DRF",
+    "DESCRIPTION": """
+        A sample blog to learn about DRF.
+
+        ⚠️ Note:
+        - GET endpoints will work normally.
+        - POST/PUT/DELETE endpoints require CSRF tokens, so full testing may not work here directly.
+        - For full testing, use Postman or connect a frontend.
+    """,
     "VERSION": "1.0.0",
+    "SWAGGER_UI_SETTINGS": {
+        "persistAuthorization": True,
+        "withCredentials": True,   # <-- SUPER IMPORTANT for CSRF
+    },
+    "SWAGGER_UI_INIT_OVERRIDES": {
+        "requestInterceptor": """
+            (request) => {
+                const csrfToken = getCookie('csrftoken');
+                if (csrfToken) {
+                    request.headers['X-CSRFToken'] = csrfToken;
+                }
+                return request;
+
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+            }
+        """
+    },
     # OTHER SETTINGS
 }
 
