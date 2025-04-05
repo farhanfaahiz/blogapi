@@ -31,7 +31,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["blogapi-0kll.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["blogapi-tm70ra.fly.dev", "www.blogapi-tm70ra.fly.dev", "blogapi-0kll.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
