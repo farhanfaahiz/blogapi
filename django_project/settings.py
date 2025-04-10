@@ -31,7 +31,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = ["blogapi-tm70ra.fly.dev", "www.blogapi-tm70ra.fly.dev", "blogapi-0kll.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["blogapi-sparkling-cloud-4453.fly.dev", "blogapi-0kll.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -167,6 +167,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",   # React frontend
     "http://localhost:8000",   # Swagger and DRF API
     "http://127.0.0.1:8000",   # Swagger sometimes runs on 127.0.0.1 too
+    "https://blogapi-sparkling-cloud-4453.fly.dev"
 ]
 
 
