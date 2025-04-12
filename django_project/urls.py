@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
+from django.contrib.auth import views as auth_views
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -23,6 +24,7 @@ from drf_spectacular.views import (
 
 
 urlpatterns = [
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('admin/', admin.site.urls),
     path("api/v1/", include("posts.urls")),
     path("api-auth/", include("rest_framework.urls")),
